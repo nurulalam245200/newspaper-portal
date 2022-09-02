@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Daily NewPaper</title>
+    <link rel="stylesheet" href="style/style.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -22,7 +23,7 @@
             </h1>
           </div>
           <div>
-            <a class="btn btn-outline-primary" href="">news</a>
+            <a id="btn-news" class="btn btn-outline-primary" href="">news</a>
             <a class="btn btn-outline-primary" href="">blog</a>
             <img src="" alt="" />
           </div>
@@ -32,11 +33,11 @@
     </header>
     <main>
       <section class="container">
-        <div class="d-flex justify-content-around align-items-center"></div>
+        <div id="catagories-container" class="row"></div>
       </section>
       <section class="container mt-3 mb-3">
         <div>
-          <h2 class="bg-light p-4">4$ items found</h2>
+          <h2 class="bg-light p-4 rounded-5">4$ items found</h2>
         </div>
         <div
           class="d-flex justify-content-between align-items-center mt-3 mb-3"
@@ -55,10 +56,10 @@
         <div class="container">
           <div class="card mb-3">
             <div class="row g-0">
-              <div class="col-md-4 col-lg-4 col-sm-1">
+              <div class="col-md-4 col-lg-4 col-sm-12">
                 <img src="..." class="img-fluid rounded-start" alt="..." />
               </div>
-              <div class="col-md-8 col-lg-8 col-sm-1">
+              <div class="col-md-8 col-lg-8 col-sm-12">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">
@@ -105,5 +106,6 @@
       integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
       crossorigin="anonymous"
     ></script>
+    <script src="js/catagories.js"></script>
   </body>
 </html>
