@@ -33,7 +33,9 @@ const loadAllNews = (news) => {
 
     const newsDiv = document.createElement("div");
     newsDiv.innerHTML = `
-    <div onclick="getloadNewsDetails('${recentNews._id}')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
+    <div onclick="getloadNewsDetails('${
+      recentNews._id
+    }')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4 col-lg- col-sm-12">
           <img src="${
@@ -68,7 +70,9 @@ const loadAllNews = (news) => {
   </div>
   <!-- arrow button -->
   <div>
-  <button onclick="getloadNewsDetails('${recentNews._id}')" class="btn btn-primary >
+  <button onclick="getloadNewsDetails('${
+    recentNews._id
+  }')" class="btn btn-primary >
   
 </button>
   </div>
@@ -87,11 +91,16 @@ const getloadNewsDetails = (newsId) => {
   const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
   fetch(url)
     .then((res) => res.json())
-    .then((data) => loadNewsDetails(data));
+    .then((data) => loadNewsDetails(data.data[0]));
 };
 
-const loadNewsDetails = (details) => {
- const 
+const loadNewsDetails = (newsDetailsData) => {
+  console.log(newsDetailsData);
+  const modalTitle = document.getElementById("newsDetailsModalLabel");
+  modalTitle.innerText = newsDetailsData.author.name;
+  const newsDetail = document.getElementById("modal-details");
+  newsDetail.innerText = newsDetailsData.details;
 };
+
 getCatagories();
 getLoadALLNews();
