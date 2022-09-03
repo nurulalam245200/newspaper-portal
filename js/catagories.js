@@ -69,11 +69,13 @@ const loadAllNews = (news) => {
           recentNews.author.img
         }">
         <p class="card-text px-2"><small class="text-muted">${
-          recentNews.author.name ? recentNews.author.name : "No data available"
+          recentNews.author.name
+            ? recentNews.author.name
+            : "NoT Found Author available Here!"
         }</small> <small
                 class="text-muted px-5">${
                   recentNews.total_view
-                    ? recentNews.total_view + "M"
+                    ? recentNews.total_view + "B"
                     : "No data available"
                 }</small> </p>
                 <i class="fa-solid fa-star-half-stroke"></i>
