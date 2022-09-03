@@ -75,7 +75,7 @@ const loadAllNews = (news) => {
         }</small> <small
                 class="text-muted px-5">${
                   recentNews.total_view
-                    ? recentNews.total_view + "B"
+                    ? recentNews.total_view + "M"
                     : "No data available"
                 }</small> </p>
                 <i class="fa-solid fa-star-half-stroke"></i>
