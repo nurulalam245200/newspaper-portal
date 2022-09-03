@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Daily NewPaper</title>
     <link rel="stylesheet" href="style/style.css" />
+    <script
+      src="https://kit.fontawesome.com/88918fa279.js"
+      crossorigin="anonymous"
+    ></script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -25,10 +29,10 @@
           <div>
             <a id="btn-news" class="btn btn-outline-primary" href="">news</a>
             <a
-              data-bs-toggle="modal"
-              data-bs-target="#blogModal"
+              id=""
               class="btn btn-outline-primary"
-              href=""
+              target="_blank"
+              href="blog.html"
               >Blog</a
             >
 
@@ -37,97 +41,29 @@
         </div>
         <hr />
       </section>
-      <section>
-        <!-- Button trigger modal -->
-
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="blogModal"
-          tabindex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">
-                  Some Impotant Question
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">
-                <h4>What is Differrences between var, let, const</h4>
-                <p>
-                  1. let is a reassignable variable and without value
-                  declaration it can be initialize
-                  <br />
-                  2. const is not reassignable and it must be declar value
-                  immediatly. <br />
-                  3. var is like a global variable it can initialize without
-                  value declaration
-                </p>
-                <h4>What's Difference between arrow and regular function</h4>
-                <p>
-                  Regular function: it hava not to return if user didn't want
-                  and a regular function we can call before implement Arrow
-                  <br />
-                  function: i have to return but we don't want type return else
-                  arrow function is create by multiline we have to initialize
-                  return
-                </p>
-                <h4>What's differences of map, find ,filter</h4>
-                <p>
-                  Map: MAP (Morph Array piece by piece) it provide a new array
-                  and pick value from another array's value word to word by for
-                  change somthings that(another) array value but it cannot
-                  change that(another) array. <br />
-                  <br />
-                  Filter:its provide a new array from another array but it
-                  strain another array's value by some condition <br />
-                  <br />
-                  Find:its simmilar with filter but just it Difference by
-                  condition because when condition success it just provide first
-                  conditional value of array
-                </p>
-                <h4>Why we use Template String?</h4>
-                <p>
-                  Template String provide just no a string value, it also use by
-                  dynamtic value implement system and it
-                </p>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Save changes
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </header>
     <main>
       <!-- news catagories start -->
+      <section>
+        <div
+          id="spin"
+          class="d-none d-flex justify-content-center align-items-center"
+        >
+          <div class="spinner-border text-danger" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </section>
       <section class="container">
-        <div id="catagories-container" class="row"></div>
+        <div id="catagories-container" class="d-flex"></div>
       </section>
       <!-- news catagories end  -->
 
       <section class="container mt-3 mb-3">
         <div>
-          <h2 class="bg-light p-4 rounded-5">4$ items found</h2>
+          <h2 class="bg-light p-4 rounded-5">
+            <span id="found-news">00</span> items found
+          </h2>
         </div>
         <div
           class="d-flex justify-content-between align-items-center mt-3 mb-3"
@@ -144,58 +80,50 @@
           </div>
         </div>
       </section>
+
+      <!-- news Contents  -->
       <section class="container">
-        <div
-          id="newsContainer"
-          class="container row row-cols-lg-1 row-cols-md-3 g-4"
-        ></div>
+        <div id="newsContainer" class="card mb-3"></div>
       </section>
+      <!-- news Contents  -->
 
-      <section class="container">
-        <div
-          id="trandingNewsContainer"
-          class="container row row-cols-lg-1 row-cols-md-3 g-4"
-        ></div>
-      </section>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="newDetailsModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
 
-      <section>
-        <!-- Button trigger modal -->
-
-        <!-- Modal -->
-        <div
-          class="modal fade"
-          id="newsDetailsModal"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="newsDetailsModalLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="newsDetailsModalLabel"></h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body" id="modal-details"></div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
+            <div id="newsDetails" class="modal-body"></div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary">Understood</button>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+      <!-- modal  -->
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

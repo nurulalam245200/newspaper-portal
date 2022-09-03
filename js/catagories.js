@@ -17,158 +17,99 @@ const allCatagories = (data) => {
 };
 
 /*all news function*/
+
 const getLoadALLNews = async (newsId) => {
+  loading(true);
   const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
   const res = await fetch(url);
   const newses = await res.json();
-  const newsIndex = newses.data;
-  const newsData = [...newsIndex];
-  loadAllNews(newsData);
+  loadAllNews(newses.data);
 };
 
 const loadAllNews = (news) => {
+  const newsContainerDiv = document.getElementById("newsContainer");
+  newsContainerDiv.textContent = ``;
+  news.sort(function (a, b) {
+    return b.total_view - a.total_view;
+  });
+  document.getElementById("found-news").innerText = `${news.length}`;
   news.forEach((recentNews) => {
-    const newsContainer = document.getElementById("newsContainer");
-    newsContainer.classList.add("col");
-
     const newsDiv = document.createElement("div");
+    newsDiv.classList.add("row");
+
     newsDiv.innerHTML = `
-    <div onclick="getloadNewsDetails('${
-      recentNews._id
-    }')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
-      <div class="row g-0">
-        <div class="col-md-4 col-lg- col-sm-12">
-          <img src="${
-            recentNews.thumbnail_url
-          }" class="img-fluid rounded-start" alt="..." />
-      </div>
-      <div class="col-md-8 col-lg-8 col-sm-12">
-        <div class="card-body">
+    <div onclick=loadDetails('${recentNews._id}') class="row g-5">
+    <div class="col-md-4">
+      <img src="${
+        recentNews.image_url
+      }" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
         <h5 class="card-title">${recentNews.title}</h5>
-        <p class="card-text">${recentNews.details.slice(0, 150)}...</p>
-        <div class="d-flex justify-content-between align-items-center">
-           <div class="d-flex justify-content-between align-items-center">
-           <!-- Reporter status  -->
-            <div>
-            <img class="img-fluid "   style="height: 50px; width: 50px; border-radius: 50%" src="${
-              recentNews.author.img
-            }" alt="" />
-            </div>
-           <div class="ms-3">
-              <h5>Reporter Name: ${recentNews.author.name}</h5>
-              <p>Date:${recentNews.author.published_date}</p>
-           </div>
-           </div>
-  <!-- view icon  -->
-  <div>
-    <i></i>
-    <h4>${recentNews.total_view}</h4>
-  </div>
-  <!-- rate icon -->
-  <div>
-    <i></i>
-  </div>
-  <!-- arrow button -->
-  <div>
-  <button onclick="getloadNewsDetails('${
-    recentNews._id
-  }')" class="btn btn-primary >
-  
-</button>
-  </div>
-</div>
+        <p class="card-text">${recentNews.details.slice(0, 200)}...</p>
+        <p class="card-text"><small class="text-muted"></small></p>
+        <div class="d-flex">
+        <img style="width: 40px;border-radius: 50px ;" src="${
+          recentNews.author.img
+        }">
+        <p class="card-text px-2"><small class="text-muted">${
+          recentNews.author.name ? recentNews.author.name : "No data available"
+        }</small> <small
+                class="text-muted px-5">${
+                  recentNews.total_view
+                    ? recentNews.total_view + "M"
+                    : "No data available"
+                }</small> </p>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i onclick=getLoadDetails('${
+                  recentNews._id
+                }') class="fa-solid fa-arrow-right text-primary px-5"data-bs-toggle="modal" data-bs-target="#newDetailsModal"></i>
         </div>
-       </div>
       </div>
     </div>
-     
-
+  </div>
     `;
-    newsContainer.appendChild(newsDiv);
+    newsContainerDiv.appendChild(newsDiv);
   });
+  loading(false);
 };
-const getloadNewsDetails = (newsId) => {
-  const url = `https://openapi.programming-hero.com/api/news/${newsId}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => loadNewsDetails(data.data[0]));
+const getLoadDetails = async (newsId) => {
+  const url = `https://openapi.programming-hero.com/api/news/${newsId} `;
+  const res = await fetch(url);
+  const newses = await res.json();
+  showDetails(newses.data[0]);
 };
+const showDetails = (data) => {
+  const divMOdal = document.getElementById("staticBackdropLabel");
+  divMOdal.innerText = data.title;
+  const divDetails = document.getElementById("newsDetails");
+  divDetails.innerHTML = `
+  <p>Repoter Name:${
+    data.author.name ? data.author.name : "No Reporter found"
+  }</p>
+  <p>Total View:${data.total_view ? data.total_view : "No Views Found"}</p>
+  <p>${data.details.slice(0, 150)}</p>
 
-const loadNewsDetails = (newsDetailsData) => {
-  console.log(newsDetailsData);
-  const modalTitle = document.getElementById("newsDetailsModalLabel");
-  modalTitle.innerText = newsDetailsData.author.name;
-  const newsDetail = document.getElementById("modal-details");
-  newsDetail.innerText = newsDetailsData.details;
+  `;
 };
-// const getTrandingNews = async (newsId) => {
-//   getloadNewsDetails();
-// };
-// const trandingNews = (news) => {
-//   console.log(news);
-// const trandingNewsContainer = document.getElementById(
-//   "trandingNewsContainer"
-// );
-// news.forEach((trandNews) => {
-//   const newsDiv = document.createElement("div");
-//   newsDiv.innerHTML = `
-//     <div onclick="getloadNewsDetails('${
-//       recentNews._id
-//     }')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
-//       <div class="row g-0">
-//         <div class="col-md-4 col-lg- col-sm-12">
-//           <img src="${
-//             trandNews.thumbnail_url
-//           }" class="img-fluid rounded-start" alt="..." />
-//       </div>
-//       <div class="col-md-8 col-lg-8 col-sm-12">
-//         <div class="card-body">
-//         <h5 class="card-title">${trandNews.title}</h5>
-//         <p class="card-text">${trandNews.details.slice(0, 150)}...</p>
-//         <div class="d-flex justify-content-between align-items-center">
-//            <div class="d-flex justify-content-between align-items-center">
-//            <!-- Reporter status  -->
-//             <div>
-//             <img class="img-fluid "   style="height: 50px; width: 50px; border-radius: 50%" src="${
-//               trandNews.author.img
-//             }" alt="" />
-//             </div>
-//            <div class="ms-3">
-//               <h5>Reporter Name: ${trandNews.author.name}</h5>
-//               <p>Date:${trandNews.author.published_date}</p>
-//            </div>
-//            </div>
-//   <!-- view icon  -->
-//   <div>
-//     <i></i>
-//     <h4>${trandNews.total_view}</h4>
-//   </div>
-//   <!-- rate icon -->
-//   <div>
-//     <i></i>
-//   </div>
-//   <!-- arrow button -->
-//   <div>
-//   <button onclick="getloadNewsDetails('${
-//     trandNews._id
-//   }')" class="btn btn-primary >
-
-// </button>
-//   </div>
-// </div>
-//         </div>
-//        </div>
-//       </div>
-//     </div>
-
-//     `;
-//   newsContainer.appendChild(newsDiv);
-// });
-// };
-document.getElementById("tranding-news").addEventListener("click", function () {
-  trandingNews();
-  getTrandingNews();
-});
-
-getCatagories();
-getLoadALLNews();
+const allNews = async (newsId) => {
+  const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
+  const res = await fetch(url);
+  const newses = await res.json();
+  console.log(newses.data);
+};
+const loading = (isLoad) => {
+  const spinContainer = document.getElementById("spin");
+  if (isLoad) {
+    spinContainer.classList.remove("d-none");
+  } else {
+    spinContainer.classList.add("d-none");
+  }
+};
+const all = allNews("08");
+getCatagories(all);

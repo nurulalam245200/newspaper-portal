@@ -48,3 +48,172 @@
   2. const is not reassignable and it must be declar value immediatly. 3. var is
   like a global variable it can
 </p>
+
+
+
+<div onclick="getloadNewsDetails('${
+  recentNews._id
+}')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4 col-lg- col-sm-12">
+      <img src="${
+        recentNews.thumbnail_url
+      }" class="img-fluid rounded-start" alt="..." />
+  </div>
+  <div class="col-md-8 col-lg-8 col-sm-12">
+    <div class="card-body">
+    <h5 class="card-title">${recentNews.title}</h5>
+    <p class="card-text">${recentNews.details.slice(0, 150)}...</p>
+    <div class="d-flex justify-content-between align-items-center">
+       <div class="d-flex justify-content-between align-items-center">
+       <!-- Reporter status  -->
+        <div>
+        <img class="img-fluid "   style="height: 50px; width: 50px; border-radius: 50%" src="${
+          recentNews.author.img
+        }" alt="" />
+        </div>
+       <div class="ms-3">
+          <h5>Reporter Name: ${recentNews.author.name}</h5>
+          <p>Date:${recentNews.author.published_date}</p>
+       </div>
+       </div>
+<!-- view icon  -->
+<div class="d-flex justify-content-between align-items-center">
+<i class="fa-regular fa-eye"></i>
+<h4>${recentNews.total_view}</h4>
+</div>
+<!-- rate icon -->
+<div>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>${recentNews.rating.number}</span>
+</div>
+<!-- arrow button -->
+<div>
+<button onclick="getloadNewsDetails('${
+recentNews._id
+}')" class="btn btn-primary >
+
+</button>
+</div>
+</div>
+    </div>
+   </div>
+  </div>
+</div>
+
+`;
+
+
+<h4>What is Differrences between var, let, const</h4>
+                <p>
+                  1. let is a reassignable variable and without value
+                  declaration it can be initialize
+                  <br />
+                  2. const is not reassignable and it must be declar value
+                  immediatly. <br />
+                  3. var is like a global variable it can initialize without
+                  value declaration
+                </p>
+                <h4>What's Difference between arrow and regular function</h4>
+                <p>
+                  Regular function: it hava not to return if user didn't want
+                  and a regular function we can call before implement Arrow
+                  <br />
+                  function: i have to return but we don't want type return else
+                  arrow function is create by multiline we have to initialize
+                  return
+                </p>
+                <h4>What's differences of map, find ,filter</h4>
+                <p>
+                  Map: MAP (Morph Array piece by piece) it provide a new array
+                  and pick value from another array's value word to word by for
+                  change somthings that(another) array value but it cannot
+                  change that(another) array. <br />
+                  <br />
+                  Filter:its provide a new array from another array but it
+                  strain another array's value by some condition <br />
+                  <br />
+                  Find:its simmilar with filter but just it Difference by
+                  condition because when condition success it just provide first
+                  conditional value of array
+                </p>
+                <h4>Why we use Template String?</h4>
+                <p>
+                  Template String provide just no a string value, it also use by
+                  dynamtic value implement system and it
+                </p>
+
+                row.innerHTML = `
+                <div class="row g-4">
+                                <div class="col-md-3">
+                                    <img src="${image_url}" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${title}</h5>
+                                        <p class="card-text">${details.length > 300 ? details.slice(0, 300) + '....' : details}</p>
+                                        <div class="d-flex">
+                                        <img style="width: 40px;border-radius: 50px ;" src="${author.img}">
+                                        <p class="card-text px-2"><small class="text-muted">${author.name ? author.name : "No data available"}</small> <small
+                                                class="text-muted px-5">${total_view ? total_view + 'M' : "No data available"}</small> </p>
+                                                <i class="fa-solid fa-star-half-stroke"></i>
+                                                <i class="fa-regular fa-star"></i>
+                                                <i class="fa-regular fa-star"></i>
+                                                <i class="fa-regular fa-star"></i>
+                                                <i class="fa-regular fa-star"></i>
+                                                
+                                                <i onclick=loadDetails('${posts._id}') class="fa-solid fa-arrow-right text-info px-5"data-bs-toggle="modal" data-bs-target="#postDetailsModal"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                `
+                postContainer.appendChild(row)
+
+
+
+
+
+
+                <section>
+                  <!-- Button trigger modal -->
+          
+                  <!-- Modal -->
+                  <div
+                    class="modal fade"
+                    id="newsDetailsModal"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    aria-labelledby="newsDetailsModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="newsDetailsModalLabel"></h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body" id="modal-details"></div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
