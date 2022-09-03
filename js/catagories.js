@@ -1,3 +1,8 @@
+/*------------------------------
+      JSON API Start 
+----------------------------*/
+
+/*Catagories data load function */
 const getCatagories = () => {
   try {
     fetch("https://openapi.programming-hero.com/api/news/categories")
@@ -7,11 +12,11 @@ const getCatagories = () => {
     console.log(error);
   }
 };
+/*Catagories load function and add a catagory button*/
 const allCatagories = (data) => {
   const categoriesContainer = document.getElementById("catagories-container");
   for (const catagories of data) {
     const newsButton = document.createElement("div");
-    // newsButton.classList = "d-flexcol-lg-1 col-sm-12 m-auto";
     newsButton.innerHTML = `
     <button class="btn btn-outline-primary" onclick="getLoadALLNews('${catagories.category_id}')">${catagories.category_name}</button>
     `;
@@ -20,7 +25,7 @@ const allCatagories = (data) => {
   }
 };
 
-/*all news function*/
+/* ALl NewsShow data load function */
 
 const getLoadALLNews = async (newsId) => {
   loading(true);
@@ -33,7 +38,7 @@ const getLoadALLNews = async (newsId) => {
     console.log(error);
   }
 };
-
+/* Data load from fetch and card Add function */
 const loadAllNews = (news) => {
   const newsContainerDiv = document.getElementById("newsContainer");
   newsContainerDiv.textContent = ``;
@@ -44,20 +49,21 @@ const loadAllNews = (news) => {
   news.forEach((recentNews) => {
     const newsDiv = document.createElement("div");
     newsDiv.classList.add("row");
-
+    /* card innerHtml start*/
     newsDiv.innerHTML = `
     <div onclick="getLoadDetails('${
       recentNews._id
     }')" data-bs-toggle="modal" data-bs-target="#newDetailsModal"
      class="row g-5">
     <div class="col-md-4">
-      <img src="${recentNews.image_url}" class="img-fluid" alt="news-pic">
+      <img src="${
+        recentNews.image_url
+      }" class="img-fluid rounded-2" alt="news-pic">
     </div>
     <div class="col-md-8">
       <div class="card-body">
         <h5 class="card-title">${recentNews.title}</h5>
         <p class="card-text">${recentNews.details.slice(0, 200)}...</p>
-        <p class="card-text"><small class="text-muted"></small></p>
         <div class="d-flex">
         <img  style="width: 50px; height: 50px; border-radius:50%;" src="${
           recentNews.author.img
@@ -86,9 +92,14 @@ const loadAllNews = (news) => {
   </div>
     `;
     newsContainerDiv.appendChild(newsDiv);
+
+    /* card innerHtml end*/
   });
+  /*spinner Load function */
   loading(false);
 };
+
+/*New Details Data load Function */
 const getLoadDetails = async (newsId) => {
   try {
     const url = `https://openapi.programming-hero.com/api/news/${newsId} `;
@@ -99,10 +110,13 @@ const getLoadDetails = async (newsId) => {
     console.log(error);
   }
 };
+
+/*New Details Data load Function from fetch and create Modal */
 const showDetails = (data) => {
   const divMOdal = document.getElementById("staticBackdropLabel");
   divMOdal.innerText = data.title;
   const divDetails = document.getElementById("newsDetails");
+  /*modal innerHTML start */
   divDetails.innerHTML = `
   <p>Repoter Name:${
     data.author.name ? data.author.name : "No Reporter found"
@@ -114,17 +128,10 @@ const showDetails = (data) => {
   <p>${data.details.slice(0, 350)}...</p>
 
   `;
+  /*modal innerHTML start */
 };
-const allNews = async (newsId) => {
-  try {
-    const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
-    const res = await fetch(url);
-    const newses = await res.json();
-    console.log(newses.data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+
+/* spinner load function */
 const loading = (isLoad) => {
   const spinContainer = document.getElementById("spin");
   if (isLoad) {
@@ -134,4 +141,5 @@ const loading = (isLoad) => {
   }
 };
 
+/*All news catagory call here*/
 getCatagories();
