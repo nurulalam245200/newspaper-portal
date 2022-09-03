@@ -7,7 +7,7 @@ const allCatagories = (data) => {
   const categoriesContainer = document.getElementById("catagories-container");
   for (const catagories of data) {
     const newsButton = document.createElement("div");
-    newsButton.classList = "col-lg-1 col-sm-12 m-auto";
+    // newsButton.classList = "d-flexcol-lg-1 col-sm-12 m-auto";
     newsButton.innerHTML = `
     <button class="btn btn-outline-primary" onclick="getLoadALLNews('${catagories.category_id}')">${catagories.category_name}</button>
     `;
@@ -38,7 +38,10 @@ const loadAllNews = (news) => {
     newsDiv.classList.add("row");
 
     newsDiv.innerHTML = `
-    <div onclick=loadDetails('${recentNews._id}') class="row g-5">
+    <div onclick="getLoadDetails('${
+      recentNews._id
+    }')" data-bs-toggle="modal" data-bs-target="#newDetailsModal"
+     class="row g-5">
     <div class="col-md-4">
       <img src="${
         recentNews.image_url
@@ -50,7 +53,7 @@ const loadAllNews = (news) => {
         <p class="card-text">${recentNews.details.slice(0, 200)}...</p>
         <p class="card-text"><small class="text-muted"></small></p>
         <div class="d-flex">
-        <img style="width: 40px;border-radius: 50px ;" src="${
+        <img  style="width: 50px; height: 50px; border-radius:50%;" src="${
           recentNews.author.img
         }">
         <p class="card-text px-2"><small class="text-muted">${
@@ -66,9 +69,11 @@ const loadAllNews = (news) => {
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
+                <p class=text-muted fs-4 fw-bold>${recentNews.rating.number}</p>
                 <i onclick=getLoadDetails('${
                   recentNews._id
                 }') class="fa-solid fa-arrow-right text-primary px-5"data-bs-toggle="modal" data-bs-target="#newDetailsModal"></i>
+               
         </div>
       </div>
     </div>
