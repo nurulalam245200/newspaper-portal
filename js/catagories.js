@@ -101,6 +101,74 @@ const loadNewsDetails = (newsDetailsData) => {
   const newsDetail = document.getElementById("modal-details");
   newsDetail.innerText = newsDetailsData.details;
 };
+// const getTrandingNews = async (newsId) => {
+//   getloadNewsDetails();
+// };
+// const trandingNews = (news) => {
+//   console.log(news);
+// const trandingNewsContainer = document.getElementById(
+//   "trandingNewsContainer"
+// );
+// news.forEach((trandNews) => {
+//   const newsDiv = document.createElement("div");
+//   newsDiv.innerHTML = `
+//     <div onclick="getloadNewsDetails('${
+//       recentNews._id
+//     }')" data-bs-toggle="modal" data-bs-target="#newsDetailsModal" class="card mb-3">
+//       <div class="row g-0">
+//         <div class="col-md-4 col-lg- col-sm-12">
+//           <img src="${
+//             trandNews.thumbnail_url
+//           }" class="img-fluid rounded-start" alt="..." />
+//       </div>
+//       <div class="col-md-8 col-lg-8 col-sm-12">
+//         <div class="card-body">
+//         <h5 class="card-title">${trandNews.title}</h5>
+//         <p class="card-text">${trandNews.details.slice(0, 150)}...</p>
+//         <div class="d-flex justify-content-between align-items-center">
+//            <div class="d-flex justify-content-between align-items-center">
+//            <!-- Reporter status  -->
+//             <div>
+//             <img class="img-fluid "   style="height: 50px; width: 50px; border-radius: 50%" src="${
+//               trandNews.author.img
+//             }" alt="" />
+//             </div>
+//            <div class="ms-3">
+//               <h5>Reporter Name: ${trandNews.author.name}</h5>
+//               <p>Date:${trandNews.author.published_date}</p>
+//            </div>
+//            </div>
+//   <!-- view icon  -->
+//   <div>
+//     <i></i>
+//     <h4>${trandNews.total_view}</h4>
+//   </div>
+//   <!-- rate icon -->
+//   <div>
+//     <i></i>
+//   </div>
+//   <!-- arrow button -->
+//   <div>
+//   <button onclick="getloadNewsDetails('${
+//     trandNews._id
+//   }')" class="btn btn-primary >
+
+// </button>
+//   </div>
+// </div>
+//         </div>
+//        </div>
+//       </div>
+//     </div>
+
+//     `;
+//   newsContainer.appendChild(newsDiv);
+// });
+// };
+document.getElementById("tranding-news").addEventListener("click", function () {
+  trandingNews();
+  getTrandingNews();
+});
 
 getCatagories();
 getLoadALLNews();

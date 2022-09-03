@@ -24,11 +24,98 @@
           </div>
           <div>
             <a id="btn-news" class="btn btn-outline-primary" href="">news</a>
-            <a class="btn btn-outline-primary" href="">blog</a>
+            <a
+              data-bs-toggle="modal"
+              data-bs-target="#blogModal"
+              class="btn btn-outline-primary"
+              href=""
+              >Blog</a
+            >
+
             <img src="" alt="" />
           </div>
         </div>
         <hr />
+      </section>
+      <section>
+        <!-- Button trigger modal -->
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="blogModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Some Impotant Question
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <h4>What is Differrences between var, let, const</h4>
+                <p>
+                  1. let is a reassignable variable and without value
+                  declaration it can be initialize
+                  <br />
+                  2. const is not reassignable and it must be declar value
+                  immediatly. <br />
+                  3. var is like a global variable it can initialize without
+                  value declaration
+                </p>
+                <h4>What's Difference between arrow and regular function</h4>
+                <p>
+                  Regular function: it hava not to return if user didn't want
+                  and a regular function we can call before implement Arrow
+                  <br />
+                  function: i have to return but we don't want type return else
+                  arrow function is create by multiline we have to initialize
+                  return
+                </p>
+                <h4>What's differences of map, find ,filter</h4>
+                <p>
+                  Map: MAP (Morph Array piece by piece) it provide a new array
+                  and pick value from another array's value word to word by for
+                  change somthings that(another) array value but it cannot
+                  change that(another) array. <br />
+                  <br />
+                  Filter:its provide a new array from another array but it
+                  strain another array's value by some condition <br />
+                  <br />
+                  Find:its simmilar with filter but just it Difference by
+                  condition because when condition success it just provide first
+                  conditional value of array
+                </p>
+                <h4>Why we use Template String?</h4>
+                <p>
+                  Template String provide just no a string value, it also use by
+                  dynamtic value implement system and it
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </header>
     <main>
@@ -51,7 +138,9 @@
           </div>
           <div>
             <button class="btn btn-outline-primary">Today's Pick</button>
-            <button class="btn btn-outline-primary">Tranding</button>
+            <button id="tranding-news" class="btn btn-outline-primary">
+              Tranding
+            </button>
           </div>
         </div>
       </section>
@@ -61,6 +150,14 @@
           class="container row row-cols-lg-1 row-cols-md-3 g-4"
         ></div>
       </section>
+
+      <section class="container">
+        <div
+          id="trandingNewsContainer"
+          class="container row row-cols-lg-1 row-cols-md-3 g-4"
+        ></div>
+      </section>
+
       <section>
         <!-- Button trigger modal -->
 
