@@ -1,7 +1,11 @@
 const getCatagories = () => {
-  fetch("https://openapi.programming-hero.com/api/news/categories")
-    .then((res) => res.json())
-    .then((catalog) => allCatagories(catalog.data.news_category));
+  try {
+    fetch("https://openapi.programming-hero.com/api/news/categories")
+      .then((res) => res.json())
+      .then((catalog) => allCatagories(catalog.data.news_category));
+  } catch (error) {
+    console.log(error);
+  }
 };
 const allCatagories = (data) => {
   const categoriesContainer = document.getElementById("catagories-container");
@@ -20,10 +24,14 @@ const allCatagories = (data) => {
 
 const getLoadALLNews = async (newsId) => {
   loading(true);
-  const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
-  const res = await fetch(url);
-  const newses = await res.json();
-  loadAllNews(newses.data);
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
+    const res = await fetch(url);
+    const newses = await res.json();
+    loadAllNews(newses.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const loadAllNews = (news) => {
@@ -43,9 +51,7 @@ const loadAllNews = (news) => {
     }')" data-bs-toggle="modal" data-bs-target="#newDetailsModal"
      class="row g-5">
     <div class="col-md-4">
-      <img src="${
-        recentNews.image_url
-      }" class="img-fluid rounded-start" alt="...">
+      <img src="${recentNews.image_url}" class="img-fluid" alt="news-pic">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -84,10 +90,14 @@ const loadAllNews = (news) => {
   loading(false);
 };
 const getLoadDetails = async (newsId) => {
-  const url = `https://openapi.programming-hero.com/api/news/${newsId} `;
-  const res = await fetch(url);
-  const newses = await res.json();
-  showDetails(newses.data[0]);
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/${newsId} `;
+    const res = await fetch(url);
+    const newses = await res.json();
+    showDetails(newses.data[0]);
+  } catch (error) {
+    console.log(error);
+  }
 };
 const showDetails = (data) => {
   const divMOdal = document.getElementById("staticBackdropLabel");
@@ -97,16 +107,23 @@ const showDetails = (data) => {
   <p>Repoter Name:${
     data.author.name ? data.author.name : "No Reporter found"
   }</p>
+  <img class="img-fluid"src="${data.image_url}" alt="news-pic">
+  <p>Reporter Name: ${data.author.published_date}</p>
+  <p>Viral: ${data.rating.badge} , ${data.rating.number}</p>
   <p>Total View:${data.total_view ? data.total_view : "No Views Found"}</p>
-  <p>${data.details.slice(0, 150)}</p>
+  <p>${data.details.slice(0, 350)}...</p>
 
   `;
 };
 const allNews = async (newsId) => {
-  const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
-  const res = await fetch(url);
-  const newses = await res.json();
-  console.log(newses.data);
+  try {
+    const url = `https://openapi.programming-hero.com/api/news/category/${newsId}`;
+    const res = await fetch(url);
+    const newses = await res.json();
+    console.log(newses.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 const loading = (isLoad) => {
   const spinContainer = document.getElementById("spin");
@@ -116,5 +133,5 @@ const loading = (isLoad) => {
     spinContainer.classList.add("d-none");
   }
 };
-const all = allNews("08");
-getCatagories(all);
+
+getCatagories();
